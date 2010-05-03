@@ -57,6 +57,16 @@ public final class Path {
     public static final class Builder {
         ImmutableList.Builder<PathElement> elements = ImmutableList.builder();
 
+        public Builder add(PathElement el) {
+            elements.add(el);
+            return this;
+        }
+
+        public Builder addAll(Iterable<PathElement> els) {
+            elements.addAll(els);
+            return this;
+        }
+
         public Builder moveTo(Point point) {
             elements.add(PathElement.moveTo(point));
             return this;
@@ -79,11 +89,6 @@ public final class Path {
 
         public Builder close() {
             elements.add(PathElement.close());
-            return this;
-        }
-
-        public Builder element(PathElement el) {
-            elements.add(el);
             return this;
         }
 

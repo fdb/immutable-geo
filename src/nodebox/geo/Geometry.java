@@ -9,7 +9,7 @@ public final class Geometry {
         return EMPTY_GEOMETRY;
     }
 
-    public static Geometry of(Path ... paths) {
+    public static Geometry of(Path... paths) {
         return new Geometry(ImmutableList.copyOf(paths));
     }
 

@@ -1,12 +1,11 @@
 package nodebox.geo;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
+import nodebox.collect.Parallels;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.List;
 
 public final class Transform {
 
@@ -35,6 +34,8 @@ public final class Transform {
     }
 
     public static final Transform IDENTITY = new Transform();
+
+
     private final AffineTransform transform = new AffineTransform();
 
     private Transform() {
@@ -51,9 +52,25 @@ public final class Transform {
     public final Path map(Path path) {
         Path.Builder b = Path.builder();
         for (PathElement el : path.getElements()) {
-            b.element(map(el));
+            b.add(map(el));
         }
         return b.build();
+    }
+
+    /**
+     * Parallel map.
+     *
+     * @param path the path to transform
+     * @return a transformed path.
+     */
+    public final Path pmap(Path path) {
+        final int nElements = path.getElementCount();
+        List<PathElement> elements = Parallels.chunkedTransform(path.getElements(), nElements, new Function<PathElement, PathElement>() {
+            public PathElement apply(PathElement from) {
+                return map(from);
+            }
+        });
+        return Path.builder().addAll(elements).build();
     }
 
     public final PathElement map(PathElement el) {
