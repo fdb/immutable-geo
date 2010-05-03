@@ -1,0 +1,4 @@
+An immutable geometric framework.
+
+Immutable collections provided by Google's collections framework. (http://code.google.com/p/google-collections/),
+using the Guava libraries (http://code.google.com/p/guava-libraries/).
