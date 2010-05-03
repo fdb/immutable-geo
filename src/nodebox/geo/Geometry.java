@@ -29,8 +29,12 @@ public final class Geometry {
         this.paths = paths;
     }
 
-    public Iterable<Path> getPaths() {
+    public ImmutableList<Path> getPaths() {
         return paths;
+    }
+
+    public int getPathCount() {
+        return paths.size();
     }
 
     public Iterable<PathElement> getElements() {
@@ -50,6 +54,11 @@ public final class Geometry {
 
         public Builder add(Path path) {
             paths.add(path);
+            return this;
+        }
+
+        public Builder addAll(Iterable<Path> ps) {
+            paths.addAll(ps);
             return this;
         }
 

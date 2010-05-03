@@ -49,6 +49,16 @@ public final class Transform {
         return b.build();
     }
 
+    public final Geometry pmap(Geometry geo) {
+        final int nPaths = geo.getPathCount();
+        List<Path> paths = Parallels.chunkedTransform(geo.getPaths(), nPaths, new Function<Path, Path>() {
+            public Path apply(Path from) {
+                return map(from);
+            }
+        });
+        return Geometry.builder().addAll(paths).build();
+    }
+
     public final Path map(Path path) {
         Path.Builder b = Path.builder();
         for (PathElement el : path.getElements()) {

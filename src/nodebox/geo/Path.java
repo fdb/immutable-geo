@@ -37,7 +37,7 @@ public final class Path {
         this.elements = elements;
     }
 
-    public Iterable<PathElement> getElements() {
+    public ImmutableList<PathElement> getElements() {
         return elements;
     }
 
